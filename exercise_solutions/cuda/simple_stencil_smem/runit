@@ -1,13 +1,10 @@
 #!/bin/bash
 
-#MSUB -N test
-#MSUB -j oe
-#MSUB -l nodes=1:ppn=1:gpus=1
-#MSUB -q shortq
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --partition=gpu
+#SBATCH --gres=gpu:1
 
-module load cuda50/toolkit
-module load cuda50/blas
-
-cd $PBS_O_WORKDIR
+module load cuda/6.5
 
 ./x.simple_stencil_smem

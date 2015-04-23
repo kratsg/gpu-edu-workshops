@@ -28,7 +28,7 @@ __global__ void mykernel(){
 
 int main(void) 
 {
-  mykernel<<<1,1>>>();
+  mykernel<<<1,8>>>();
   cudaDeviceSynchronize();
   printf("Hello World from Host\n");
   CUDA_CALL( cudaDeviceSynchronize() );

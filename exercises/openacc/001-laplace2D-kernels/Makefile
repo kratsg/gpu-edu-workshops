@@ -16,7 +16,7 @@
 
 CC       = pgcc
 CCFLAGS  = -tp istanbul-64
-ACCFLAGS = FIXME# add OpenACC compiler options here
+ACCFLAGS = -acc -ta=nvidia -Minfo=accel
 OMPFLAGS = -fast -mp -Minfo
 
 BIN =  laplace2d_omp laplace2d_acc

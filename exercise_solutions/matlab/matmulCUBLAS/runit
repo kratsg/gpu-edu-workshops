@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#SBATCH --job-name=simpleML
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --partition=gpu
+#SBATCH --gres=gpu:1
+
+module load matlab/2014b
+
+matlab -nodisplay -r "matmulGPUdriver, exit"

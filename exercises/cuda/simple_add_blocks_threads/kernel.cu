@@ -68,7 +68,7 @@ int main()
 
 /* launch the kernel on the GPU */
 /* insert the launch parameters to launch properly using blocks and threads */
-  add<<< FIXME, FIXME >>>( d_a, d_b, d_c );
+  add<<< N/THREADS_PER_BLOCK, THREADS_PER_BLOCK >>>( d_a, d_b, d_c );
   CUDA_CHECK();
   CUDA_CALL( cudaDeviceSynchronize() );
 

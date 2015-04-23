@@ -1,14 +1,12 @@
 #!/bin/bash
 
-#PBS -N test
-#PBS -j oe
-#PBS -l select=1:ngpus=1:gpu_model=k20:ncpus=1
-#PBS -l walltime=00:20:00
+#SBATCH --output=acc.out
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --partition=gpu
+#SBATCH --gres=gpu:1
 
-source /etc/profile.d/modules.sh
-module purge
-module load pgi
+module load pgi/2013
 
-cd $PBS_O_WORKDIR
 
 ./laplace2d_acc

@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#PBS -N test
-#PBS -j oe
-#PBS -l select=1:ngpus=1:gpu_model=k20:ncpus=1
-#PBS -l walltime=00:20:00
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --partition=gpu
+#SBATCH --gres=gpu:1
 
-cd $PBS_O_WORKDIR
+module load pgi/2013
 
 OMP_NUM_THREADS=1 ./laplace2d_omp

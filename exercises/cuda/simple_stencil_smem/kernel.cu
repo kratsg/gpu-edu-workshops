@@ -28,9 +28,9 @@
 #define CUDA_CHECK() 
 #endif
 
-#define N 4000000
+#define N 1024*1024
 #define RADIUS 5
-#define THREADS_PER_BLOCK 512
+#define THREADS_PER_BLOCK 64
 
 /* stencil kernel */
 
@@ -55,7 +55,7 @@ __global__ void stencil_1d(int n, double *in, double *out)
     temp[lindex + THREADS_PER_BLOCK] = in[gindex + THREADS_PER_BLOCK];
   } /* end if */
 
-  __syncthreads();
+ __syncthreads();
 	
 /* code to handle the boundary conditions */
   if( gindex < RADIUS || gindex >= (n - RADIUS) ) 

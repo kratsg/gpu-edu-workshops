@@ -32,7 +32,7 @@ __global__ void add(int *a, int *b, int *c)
 {
 /* add the proper index so each block calculates a different value in the 
    array  */
-  c[FIXME] = a[FIXME] + b[FIXME];
+  c[blockIdx.x] = a[blockIdx.x] + b[blockIdx.x];
 }
 
 #define N 32
@@ -47,7 +47,8 @@ int main()
 
   CUDA_CALL( cudaMalloc( (void **) &d_a, size ) );
 /* insert code here for d_b and d_c */
-  FIXME
+  CUDA_CALL( cudaMalloc( (void **) &d_c, size ) );
+  CUDA_CALL( cudaMalloc( (void **) &d_b, size ) );
 
 /* allocate space for host copies of a, b, c and setup input values */
 
@@ -57,7 +58,7 @@ int main()
 
   for( int i = 0; i < N; i++ )
   {
-    a[i] = b[i] = i;
+    a[i] = b[i] = 3*i;
     c[i] = 0;
   } /* end for */
 
@@ -65,11 +66,11 @@ int main()
 
   CUDA_CALL( cudaMemcpy( d_a, a, size, cudaMemcpyHostToDevice ) );
 /* insert code to copy b to the device */
-  FIXME
+  CUDA_CALL( cudaMemcpy( d_b, b, size, cudaMemcpyHostToDevice ) );
 
 /* launch the kernel on the GPU */
 /* finish the kernel launch with N blocks and 1 thread per block */
-  add<<< FIXME, FIXME >>>( d_a, d_b, d_c );
+  add<<< N, 1 >>>( d_a, d_b, d_c );
   CUDA_CHECK()
   CUDA_CALL( cudaDeviceSynchronize() );
 

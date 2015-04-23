@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --partition=gpu
+#SBATCH --gres=gpu:1
+
+/home/jbentz/anaconda/bin/python ./saxpy.py

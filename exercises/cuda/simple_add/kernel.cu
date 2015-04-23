@@ -43,7 +43,8 @@ int main()
 
   CUDA_CALL( cudaMalloc( (void **) &d_a, size ) );
 /* enter code here to malloc d_b and d_c */
-  FIXME
+  CUDA_CALL( cudaMalloc( (void **) &d_b, size) );
+  CUDA_CALL( cudaMalloc( (void **) &d_c, size) );
 
 /* setup initial values */
 
@@ -55,10 +56,11 @@ int main()
 
   CUDA_CALL( cudaMemcpy( d_a, &a, size, cudaMemcpyHostToDevice ) );
 /* enter code here to copy d_b to device */
-  FIXME
+  CUDA_CALL( cudaMemcpy( d_b, &b, size, cudaMemcpyHostToDevice ) );
+  CUDA_CALL( cudaMemcpy( d_c, &c, size, cudaMemcpyHostToDevice ) );
 
 /* enter code here to launch the kernel on the GPU */
-  FIXME
+  add<<<1,1>>>(d_a, d_b, d_c);
 
   CUDA_CHECK()
   CUDA_CALL( cudaDeviceSynchronize() );

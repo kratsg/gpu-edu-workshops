@@ -15,20 +15,20 @@
  */
 
 #define CUDA_CALL(F)  if( (F) != cudaSuccess ) \
-  {printf("Error %s at %s:%d\n", cudaGetErrorString(cudaGetLastError()), __FILE__,__LINE__); exit(-1);} 
+  {printf("Error %s at %s:%d\n", cudaGetErrorString(cudaGetLastError()), __FILE__,__LINE__); exit(-1);}
 
 #define CUDA_CHECK()  if( (cudaPeekAtLastError()) != cudaSuccess ) \
-  {printf("Error %s at %s:%d\n", cudaGetErrorString(cudaGetLastError()), __FILE__,__LINE__-1); exit(-1);} 
+  {printf("Error %s at %s:%d\n", cudaGetErrorString(cudaGetLastError()), __FILE__,__LINE__-1); exit(-1);}
 
 #include <stdio.h>
 
 __global__ void mykernel(){
-  printf("Hello world from device!\n");
+  printf("Hello world from block %d, device %d!\n", blockIdx.x, threadIdx.x);
 } /* end kernel */
 
-int main(void) 
+int main(void)
 {
-  mykernel<<<1,8>>>();
+  mykernel<<<800,1024>>>();
   cudaDeviceSynchronize();
   printf("Hello World from Host\n");
   CUDA_CALL( cudaDeviceSynchronize() );

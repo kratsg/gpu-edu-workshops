@@ -22,7 +22,14 @@ hello_world: kernel.o
 	$(NVCC) $(NVOPTS) -o x.hello_world kernel.o
 
 kernel.o: kernel.cu
-	$(NVCC) $(NVOPTS) -c kernel.cu 
+	$(NVCC) $(NVOPTS) -c kernel.cu
+
+query: query.o
+	$(NVCC) $(NVOPTS) -o x.query query.o
+
+query.o: query.cu
+	$(NVCC) $(NVOPTS) -c query.cu
+
 
 clean:
-	rm -rf kernel.o x.hello_world
+	rm -rf kernel.o x.hello_world kernel_query.o x.query
